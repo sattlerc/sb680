@@ -1,0 +1,1 @@
+cmd_/home/noname/smart/module/sb680.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/noname/smart/module/sb680.ko /home/noname/smart/module/sb680.o /home/noname/smart/module/sb680.mod.o
