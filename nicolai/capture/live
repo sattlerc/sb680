@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # assumes whiteboard plugged into bus 1
-sudo tshark -T fields -e usb.capdata -Y 'usb.src matches "1.*.2"' -i usbmon1
+sudo tshark -s 0 -T fields -e usb.capdata -Y 'usb.src matches "1.*.2"' -i usbmon1
