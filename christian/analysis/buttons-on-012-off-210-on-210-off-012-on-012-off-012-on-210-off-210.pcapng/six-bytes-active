@@ -1,0 +1,51 @@
+# button 0: keyboard
+# button 1: mouse
+# button 2: question mark
+
+# buttons 0, 1, 2 pressed
+d2:06:01:00:d5:00
+d2:06:03:00:d7:00
+d2:06:07:00:d3:00
+
+# buttons 2, 1, 0 released
+d2:06:03:00:d7:00
+d2:06:01:00:d5:00
+d2:06:00:00:d4:00
+
+# buttons 2, 1, 0 pressed
+d2:06:04:00:d0:00
+d2:06:06:00:d2:00
+d2:06:07:00:d3:00
+
+# buttons 0, 1, 2 released
+d2:06:06:00:d2:00
+d2:06:04:00:d0:00
+d2:06:00:00:d4:00
+
+# buttons 0, 1, 2 pressed
+d2:06:01:00:d5:00
+d2:06:03:00:d7:00
+d2:06:07:00:d3:00
+
+# buttons 0, 1, 2 released
+d2:06:06:00:d2:00
+d2:06:04:00:d0:00
+d2:06:00:00:d4:00
+
+# buttons 2, 1, 0 pressed
+d2:06:04:00:d0:00
+d2:06:06:00:d2:00
+d2:06:07:00:d3:00
+
+# buttons 2, 1, 0 released
+d2:06:03:00:d7:00
+d2:06:01:00:d5:00
+d2:06:00:00:d4:00
+
+# format:
+# 11010010 00000110 00000cba 00000000 XXXXXXXX 00000000
+#
+# a: status of keyboard button (0: up, 1: down)
+# b: status of mouse button
+# c: status of question mark button
+# XXXXXXXX: checksum (previous bytes XORed)

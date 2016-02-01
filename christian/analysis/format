@@ -1,0 +1,78 @@
+Interactive whiteboard SB680
+============================
+
+vendor id: 0x0b8c (SMART Technologies Inc.)
+product id: 0x013a
+
+single configuration
+single interface
+two endpoints
+
+endpoint 1: input, interrupt transfer
+endpoint 2: output, interrupt transfer
+
+endpoint 1
+----------
+
+input, interrupt transfer
+
+observed format of data:
+* 1 byte: major code
+* <major content>, depending on major code
+
+  ## major code 0x01: touchpad state changes ##
+  <major content>:
+  * 1 bit: contact (0: no, 1: yes)
+  * 7 bits: 0
+  * 12 bits: coordinate X
+  * 12 bits: coordinate Y
+  coordinates are also reported for no-contact messages
+
+  ## major code 0x02: [other?] ##
+  <major content>:
+  * 1 byte: minor code
+  * <minor content>, depending on minor code
+  * 1 byte: 0
+  * 1 byte: checksum, previous bytes starting from minor code XORed
+  * padded with 0 such that length is 18 bytes
+
+    #### minor code 0xc3: request for data timed out? ####
+    sent by default after 0.5s if no other event occurred
+    <major content>: [observed values]
+    * 1 byte: 0
+    * 1 byte: 0x61
+    * 7 bits: 0
+    * 1 bit: 0 or 1
+
+    #### minor code 0xd2: generalized button state changes ####
+    <minor content>:
+    * 1 byte: sub code
+    * <sub content>, depending on sub code
+
+      ###### sub code 0x05: pen/eraser state changes ######
+      <sub content>:
+      * 1 bit: status of blue pen (0: up, 1: down)
+      * 1 bit: status of green pen
+      * 1 bit: status of erased
+      * 1 bit: status of red pen
+      * 1 bit: status of black pen
+      * 3 bits: 0
+
+      ###### sub code 0x06: button state changes ######
+      <sub content>:
+      * 1 bit: status of keyboard button (0: up, 1: down)
+      * 1 bit: status of mouse button
+      * 1 bit: status of question mark button
+      * 5 bits: 0
+
+    #### minor code 0xe1: [unknown] ####
+    <minor content>:
+    * 1 byte: 0x14
+
+
+endpoint 2
+----------
+
+output, interrupt transfer
+unknown purpose/format
+controls status LED?

@@ -1,0 +1,58 @@
+# terminology:
+# pen inside hole = pen off = pen up
+# pen out of hole = pen on  = pen down
+#
+# pressed = transition from up to down
+# released = transition from down to up
+
+# pens numbered from physical right to left:
+#   pen 0: blue
+#   pen 1: green
+#   pen 2: eraser
+#   pen 3: red
+#   pen 4: black
+
+# pens 4 to 0 released
+d2:05:0f:00:d8:00
+d2:05:07:00:d0:00
+d2:05:03:00:d4:00
+d2:05:01:00:d6:00
+d2:05:00:00:d7:00
+
+# pens 0 to 4 pressed
+d2:05:01:00:d6:00
+d2:05:03:00:d4:00
+d2:05:07:00:d0:00
+d2:05:0f:00:d8:00
+d2:05:1f:00:c8:00
+
+# pens 0 to 4 released
+d2:05:1e:00:c9:00
+d2:05:1c:00:cb:00
+d2:05:18:00:cf:00
+d2:05:10:00:c7:00
+d2:05:00:00:d7:00
+
+# pens 4 to 0 pressed
+d2:05:10:00:c7:00
+d2:05:18:00:cf:00
+d2:05:1c:00:cb:00
+d2:05:1e:00:c9:00
+d2:05:1f:00:c8:00
+
+# pens 2, 1, 0, 3, 4 released
+d2:05:1b:00:cc:00
+d2:05:19:00:ce:00
+d2:05:18:00:cf:00
+d2:05:10:00:c7:00
+d2:05:00:00:d7:00
+
+# format:
+# 11010010 00000101 000edcba 00000000 XXXXXXXX 00000000
+#
+# a: status of blue pen (0: up, 1: down)
+# b: status of green pen
+# c: status of eraser
+# d: status of red pen
+# e: status of black pen
+# XXXXXXXX: checksum (previous bytes XORed)
