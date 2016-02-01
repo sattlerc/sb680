@@ -1,4 +1,7 @@
 #!/bin/bash
 
-# assumes whiteboard plugged into bus 1
-sudo tshark -s 0 -T fields -e usb.capdata -Y 'usb.src matches "1.*.2"' -i usbmon1
+# Live monitoring of contents of relevant USB packets in hex form.
+# Unless user is in wireshark group, has to run as root.
+# Usage: <script> <bus-number>
+sudo modprobe usbmon
+tshark -s 0 -T fields -e usb.capdata -Y 'usb.src matches "'"$1"'.*.2"' -i 'usbmon'"$1"

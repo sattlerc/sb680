@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Capturing packets on a specified USB bus.
+# Unless user is in wireshark group, has to run as root.
+# Usage: <script> <bus-number> <output-file>
+# e.g. ./capture 1 log
+sudo modprobe usbmon
+tshark -s 0 -P -i 'usbmon'"$1" -w "$2"
