@@ -89,12 +89,12 @@ static int sb680_raw_event(struct hid_device *hdev, struct hid_report *report, u
   struct sb680 *sb680 = hid_get_drvdata(hdev);
   struct input_dev *input = sb680->input;
   
-  printk(KERN_INFO "sb680: raw_event called");
+  //printk(KERN_INFO "sb680: raw_event called");
 
-  data = fake_data[sb680->index];
-  size = 18;
-  if (++sb680->index == sizeof(fake_data) / sizeof(fake_data[0]))
-    sb680->index = 0;
+  //data = fake_data[sb680->index];
+  //size = 18;
+  //if (++sb680->index == sizeof(fake_data) / sizeof(fake_data[0]))
+  //  sb680->index = 0;
   
   if (size == 0 || size > 18) {
     printk(KERN_INFO "sb680: bad message size %d", size);
@@ -117,6 +117,8 @@ static int sb680_raw_event(struct hid_device *hdev, struct hid_report *report, u
     input_report_key(input, BTN_TOUCH, down);
     input_report_abs(input, ABS_X, x);
     input_report_abs(input, ABS_Y, y);
+
+    printk(KERN_INFO "sb680: mouse (%d, %d)", x, y);
   } else if (data[0] == 0x02) {
     u8 checksum = 0;
     int i;
@@ -180,10 +182,6 @@ static int sb680_raw_event(struct hid_device *hdev, struct hid_report *report, u
   return 1;
 }
 
-// SMART Technologies Inc.
-#define VENDOR_ID 0x046d //0x0b8c
-#define PRODUCT_ID 0xc06c // 0x0061
-
 static int sb680_probe(struct hid_device *hdev, const struct hid_device_id *id) {
   struct sb680 *sb680;
   int error;
@@ -236,6 +234,10 @@ static void sb680_remove(struct hid_device *hdev) {
 	kfree(sb680);
 }
 
+
+// SMART Technologies Inc.
+#define VENDOR_ID 0x0b8c
+#define PRODUCT_ID 0x0001
 
 const struct hid_device_id sb680_ids[] = {
   { HID_USB_DEVICE(VENDOR_ID, PRODUCT_ID) }, // SB680
