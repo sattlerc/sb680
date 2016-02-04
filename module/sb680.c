@@ -4,7 +4,7 @@
 #include <linux/usb/input.h>
 
 u8 fake_data[][18] = {
-#include "pens-ltr"
+#include "circles"
 {}};
 
 struct sb680 {
@@ -57,11 +57,11 @@ static int sb680_init_input(struct sb680 *sb680, const struct hid_device_id *id)
 	input_set_capability(input, EV_KEY, BTN_TOOL_FINGER);
 	input_set_capability(input, EV_KEY, BTN_TOOL_PEN);
   input_set_capability(input, EV_KEY, BTN_TOOL_RUBBER);
-	input_set_capability(input, EV_KEY, KEY_F3); // black
-	input_set_capability(input, EV_KEY, KEY_F4); // red
-	input_set_capability(input, EV_KEY, KEY_F5); // green
-	input_set_capability(input, EV_KEY, KEY_F6); // blue
-	input_set_capability(input, EV_KEY, KEY_F7); // eraser
+	input_set_capability(input, EV_KEY, BTN_0); // black
+	input_set_capability(input, EV_KEY, BTN_1); // red
+	input_set_capability(input, EV_KEY, BTN_2); // green
+	input_set_capability(input, EV_KEY, BTN_3); // blue
+	input_set_capability(input, EV_KEY, BTN_4); // eraser
 
   error = input_register_device(input);
   if (error) {
@@ -89,12 +89,12 @@ static int sb680_raw_event(struct hid_device *hdev, struct hid_report *report, u
   struct sb680 *sb680 = hid_get_drvdata(hdev);
   struct input_dev *input = sb680->input;
   
-  //printk(KERN_INFO "sb680: raw_event called");
+  printk(KERN_INFO "sb680: raw_event called");
 
-  //data = fake_data[sb680->index];
-  //size = 18;
-  //if (++sb680->index == sizeof(fake_data) / sizeof(fake_data[0]))
-  //  sb680->index = 0;
+  data = fake_data[sb680->index];
+  size = 18;
+  if (++sb680->index == sizeof(fake_data) / sizeof(fake_data[0]))
+    sb680->index = 0;
   
   if (size == 0 || size > 18) {
     printk(KERN_INFO "sb680: bad message size %d", size);
@@ -153,11 +153,11 @@ static int sb680_raw_event(struct hid_device *hdev, struct hid_report *report, u
         
         pens = data[3] & 0x1f;
         printk(KERN_INFO "sb680: reporting pens %02x", pens);
-        input_report_key(input, KEY_F3, pens & 0x10); // black
-        input_report_key(input, KEY_F4, pens & 0x08); // red
-        input_report_key(input, KEY_F5, pens & 0x02); // green
-        input_report_key(input, KEY_F6, pens & 0x01); // blue
-        input_report_key(input, KEY_F7, pens & 0x04); // eraser
+        input_report_key(input, BTN_0, pens & 0x10); // black
+        input_report_key(input, BTN_1, pens & 0x08); // red
+        input_report_key(input, BTN_2, pens & 0x02); // green
+        input_report_key(input, BTN_3, pens & 0x01); // blue
+        input_report_key(input, BTN_4, pens & 0x04); // eraser
 
         // report exactly one of these as down
         input_report_key(input, BTN_TOOL_FINGER, !pens);
@@ -236,8 +236,8 @@ static void sb680_remove(struct hid_device *hdev) {
 
 
 // SMART Technologies Inc.
-#define VENDOR_ID 0x0b8c
-#define PRODUCT_ID 0x0001
+#define VENDOR_ID 0x046d // 0x0b8c
+#define PRODUCT_ID 0xc06c// 0x0001
 
 const struct hid_device_id sb680_ids[] = {
   { HID_USB_DEVICE(VENDOR_ID, PRODUCT_ID) }, // SB680
