@@ -93,7 +93,7 @@ static int sb685_raw_event(struct hid_device *hdev, struct hid_report *report, u
   struct sb685 *sb685 = hid_get_drvdata(hdev);
   struct input_dev *input = sb685->input;
   
-  printk(KERN_INFO "sb685: raw_event called");
+  //printk(KERN_INFO "sb685: raw_event called");
 
   //  data = fake_data[sb685->index];
   //size = 18;
