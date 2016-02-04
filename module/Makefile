@@ -1,4 +1,4 @@
-obj-m+=sb680.o
+obj-m+=sb680.o sb685.o
 
 all:
 	make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) modules
