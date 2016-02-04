@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo rmmod sb685; sudo rmmod hid_generic; sudo modprobe hid_generic
