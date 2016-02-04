@@ -1,6 +1,13 @@
+# Emacs
 *~
+
+# C
 *.o
 *.order
 *.ko
 .*.cmd
 *.mod.c
+
+# Haskell
+dist
+*hi

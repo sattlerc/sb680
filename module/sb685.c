@@ -100,7 +100,7 @@ static int sb685_raw_event(struct hid_device *hdev, struct hid_report *report, u
   //if (++sb685->index == sizeof(fake_data) / sizeof(fake_data[0]))
   //  sb685->index = 0;
   
-  if (size == 0 || size > 18) {
+  if (size == 0 || size > 100) {
     printk(KERN_INFO "sb685: bad message size %d", size);
     return -1;
   }
