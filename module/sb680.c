@@ -3,9 +3,13 @@
 #include <linux/hid.h>
 #include <linux/usb/input.h>
 
+#define FAKE
+
+#ifdef FAKE
 u8 fake_data[][18] = {
-#include "circles"
+#include "pens-ltr"
 {}};
+#endif
 
 struct sb680 {
   struct hid_device *hdev;
@@ -89,12 +93,14 @@ static int sb680_raw_event(struct hid_device *hdev, struct hid_report *report, u
   struct sb680 *sb680 = hid_get_drvdata(hdev);
   struct input_dev *input = sb680->input;
   
-  printk(KERN_INFO "sb680: raw_event called");
+  //printk(KERN_INFO "sb680: raw_event called");
 
+#ifdef FAKE
   data = fake_data[sb680->index];
   size = 18;
   if (++sb680->index == sizeof(fake_data) / sizeof(fake_data[0]))
     sb680->index = 0;
+#endif
   
   if (size == 0 || size > 18) {
     printk(KERN_INFO "sb680: bad message size %d", size);

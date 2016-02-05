@@ -1,3 +1,0 @@
-#!/bin/bash
-
-make && bash -c 'sudo rmmod hid_generic; sudo rmmod sb685; sudo insmod sb685.ko && sudo modprobe hid_generic; dmesg | tail'
