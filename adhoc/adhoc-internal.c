@@ -25,7 +25,7 @@ struct adhoc* adhoc_init(int fd) {
   }
 
 #ifdef DEBUG
-  printf("device: %s\n", name);
+  fprintf(stderr, "device: %s\n", name);
 #endif
   
   if (adhoc->internal_calls.init(adhoc))
@@ -73,10 +73,11 @@ int next_event_wrapper(struct adhoc *adhoc, struct input_event *event) {
   }
 
 #ifdef DEBUG
-  printf("event [type: %s, code: %s, value: %d]\n",
-         libevdev_event_type_get_name(event->type),
-         libevdev_event_code_get_name(event->type, event->code),
-         event->value);
+  fprintf(stderr,
+          "event [type: %s, code: %s, value: %d]\n",
+          libevdev_event_type_get_name(event->type),
+          libevdev_event_code_get_name(event->type, event->code),
+          event->value);
 #endif
 
   return 0;

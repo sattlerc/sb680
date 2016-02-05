@@ -258,7 +258,7 @@ static void sb880_remove(struct hid_device *hdev) {
 }
 
 
-#if 0 == 1
+#if 1 == 1
 // SMART Technologies Inc.
 #define VENDOR_ID 0x0b8c
 #define PRODUCT_ID 0x0160
