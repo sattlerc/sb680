@@ -23,8 +23,8 @@ struct adhoc* adhoc_init(int fd) {
   const char *name = libevdev_get_name(adhoc->dev);
   if (strcmp(name, "SMART SB680 Interactive Whiteboard") == 0)
     adhoc->internal_calls = internal_calls_sb680;
-  else if (strcmp(name, "SMART SB880 Interactive Whiteboard") == 0)
-    adhoc->internal_calls = internal_calls_sb880;
+  else if (strcmp(name, "SMART SB885 Interactive Whiteboard") == 0)
+    adhoc->internal_calls = internal_calls_sb885;
   else {
     fprintf(stderr, "unknown device: %s\n", name);
     goto device_error;

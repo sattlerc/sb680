@@ -1,5 +1,5 @@
 OUT = libadhoc.a
-SRCS = adhoc-internal.c adhoc-sb680.c adhoc-sb880.c
+SRCS = adhoc-internal.c adhoc-sb680.c adhoc-sb885.c
 
 DEPS = adhoc.h adhoc-internal.h
 

@@ -24,6 +24,6 @@ void report_rubber(const struct adhoc *adhoc);
 void report_pen(const struct adhoc *adhoc, uint32_t colour);
 
 extern struct internal_calls internal_calls_sb680;
-extern struct internal_calls internal_calls_sb880;
+extern struct internal_calls internal_calls_sb885;
 
 #endif

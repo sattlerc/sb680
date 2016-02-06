@@ -7,14 +7,14 @@
 
 #include "adhoc-internal.h"
 
-struct sb880_state {
+struct sb885_state {
   int x, y;
   int buttons[4];
   int pen;
   uint32_t colour;
 };
 
-void sb880_update_colour(struct sb880_state *state) {
+void sb885_update_colour(struct sb885_state *state) {
   uint32_t mask = state->buttons[0] ? 0x7f : 0xff;
   uint32_t r = state->buttons[1] ? mask : 0;
   uint32_t g = state->buttons[2] ? mask : 0;
@@ -22,10 +22,10 @@ void sb880_update_colour(struct sb880_state *state) {
   state->colour = (r << 16) | (g << 8) | b;
 }
 
-int sb880_init(struct adhoc *adhoc) {
-  struct sb880_state *state = calloc(1, sizeof(struct sb880_state));
+int sb885_init(struct adhoc *adhoc) {
+  struct sb885_state *state = calloc(1, sizeof(struct sb885_state));
   if (state == NULL) {
-    perror("sb880_init");
+    perror("sb885_init");
     return errno;
   }
 
@@ -33,12 +33,12 @@ int sb880_init(struct adhoc *adhoc) {
   return 0;
 }
 
-void sb880_exit(struct adhoc *adhoc) {
+void sb885_exit(struct adhoc *adhoc) {
   free(adhoc->state);
 }
 
-int sb880_parse(struct adhoc *adhoc) {
-  struct sb880_state *state = adhoc->state;
+int sb885_parse(struct adhoc *adhoc) {
+  struct sb885_state *state = adhoc->state;
 
   int x = -1, y = -1, touch = -1;
   int buttons[4] = {-1, -1, -1, -1};
@@ -129,7 +129,7 @@ int sb880_parse(struct adhoc *adhoc) {
         state->buttons[i] = buttons[i];
 
     if (buttons[0] == 1 || buttons[1] == 1 || buttons[2] == 1 || buttons[3] == 1) {
-      sb880_update_colour(state);
+      sb885_update_colour(state);
       if (state->pen)
         report_pen(adhoc, state->colour);
     }
@@ -152,8 +152,8 @@ int sb880_parse(struct adhoc *adhoc) {
   return 0;
 }
 
-struct internal_calls internal_calls_sb880 = {
-  .init  = sb880_init,
-  .exit  = sb880_exit,
-  .parse = sb880_parse
+struct internal_calls internal_calls_sb885 = {
+  .init  = sb885_init,
+  .exit  = sb885_exit,
+  .parse = sb885_parse
 };
