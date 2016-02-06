@@ -26,6 +26,12 @@ void adhoc_set_callbacks(struct adhoc *adhoc, const struct adhoc_callbacks *call
 
 int adhoc_parse(struct adhoc *adhoc);
 
+#define ADHOC_BUFFER_SIZE 256
+
+int scan_devices(char devices[][ADHOC_BUFFER_SIZE], char names[][ADHOC_BUFFER_SIZE], int max_devices);
+  int select_unique_device(char *device, char *name);
+int open_unique_device(int num_args, char** args);
+
 #ifdef __cplusplus
 }
 #endif

@@ -1,8 +1,7 @@
 OUT = libadhoc.a
 SRCS = adhoc-internal.c adhoc-sb680.c adhoc-sb880.c
 
-DEPS = adhoc.h
-DEPS_INTERNAL = $(DEPS) adhoc-internal.h
+DEPS = adhoc.h adhoc-internal.h
 
 OBJS = $(SRCS:.c=.o)
 
@@ -15,10 +14,12 @@ LDFLAGS += $(LIBRARIES)
 
 $(OUT): $(OBJS)
 	ar rcs $@ $^
-#	$(CC) $(LDFLAGS) -o $@ $^
 
 %.o: %.c $(DEPS_INTERNAL)
 	$(CC) $(CFLAGS) -c -o $@ $<
+
+print: print.c $(OUT) $(DEPS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< $(OUT)
 
 test: test.c $(OUT) $(DEPS)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< $(OUT)
@@ -26,5 +27,12 @@ test: test.c $(OUT) $(DEPS)
 collect-clicks: collect-clicks.cpp $(OUT) $(DEPS)
 	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $< $(OUT)
 
+setup: print
+	./setup.sh
+
+points: collect-clicks
+	./collect-clicks | tee clicks
+	../calibrate/dist/build/calibrate-compute/calibrate-compute <clicks | tee transform
+
 clean:
-	rm -f $(OUT) $(OBJS) test collect-clicks
+	rm -f $(OUT) $(OBJS) print test collect-clicks

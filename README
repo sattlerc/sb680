@@ -1,0 +1,9 @@
+SETUP:
+* In 'calibrate', run 'cabal build'.
+* In 'module', run 'make load-sb<XYZ>' where <XYZ> is your whiteboard's part number.
+* In 'adhoc', run 'make setup'.
+
+CALIBRATION:
+* Run 'calibrate/dist/build/calibrate-input/calibrate-input' and put the window on the projector screen.
+* On the main screen and in 'adhoc', run 'make points'.
+  The calibrated transform should now be in the file 'adhoc/transform'.

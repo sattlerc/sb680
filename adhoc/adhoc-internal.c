@@ -1,7 +1,13 @@
+#define _GNU_SOURCE
+
+#include <dirent.h>
 #include <error.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+
 #include <libevdev/libevdev.h>
 
 #include "adhoc-internal.h"
@@ -117,4 +123,110 @@ void report_rubber(const struct adhoc *adhoc) {
 void report_pen(const struct adhoc *adhoc, uint32_t colour) {
   if (adhoc->callbacks.select_pen != NULL)
     adhoc->callbacks.select_pen(colour);
+}
+
+
+#define DEV_INPUT "/dev/input"
+#define EVENT "event"
+
+const char *RECOGNIZED_DEVICES[] = {
+  "SMART SB680 Interactive Whiteboard",
+  "SMART SB685 Interactive Whiteboard",
+  "SMART SB885 Interactive Whiteboard"
+};
+
+int scan_devices(char devices[][ADHOC_BUFFER_SIZE], char names[][ADHOC_BUFFER_SIZE], int max_devices) {
+	struct dirent **entries;
+	int num_entries = scandir(DEV_INPUT, &entries, NULL, versionsort);
+  if (num_entries < 0)
+		return -1;
+
+  int j = 0;
+	for (int i = 0; i < num_entries && j < max_devices; i++) {
+		int r, fd;
+
+    if (strncmp(EVENT, entries[i]->d_name, strlen(EVENT)))
+      continue;
+
+		r = snprintf(devices[j], ADHOC_BUFFER_SIZE, "%s/%s", DEV_INPUT, entries[i]->d_name);
+    if (r < 0 || r >= ADHOC_BUFFER_SIZE)
+      continue;
+
+    r = 0;
+    for (int k = 0; k != sizeof(RECOGNIZED_DEVICES) / sizeof(RECOGNIZED_DEVICES[0]); ++k)
+      if (strcmp(devices[j], RECOGNIZED_DEVICES[k]) == 0)
+        r = 1;
+
+    if (!r)
+      continue;
+
+    fd = open(devices[j], O_RDONLY);
+		if (fd < 0)
+      continue;
+
+    if (ioctl(fd, EVIOCGNAME(ADHOC_BUFFER_SIZE), names[j]) == -1)
+      goto error;
+
+    ++j;
+    
+  error:
+    close(fd);
+	}
+  
+  for (int i = 0; i != num_entries; ++i)
+    free(entries[i]);
+  
+	return j;
+}
+
+int select_unique_device(char *device, char *name) {
+  char devices[8][ADHOC_BUFFER_SIZE], names[8][ADHOC_BUFFER_SIZE];
+  int r = scan_devices(devices, names, 8);
+  if (r < 0) {
+    perror("select_devices failed");
+    return r;
+  }
+
+  if (r == 0) {
+    fprintf(stderr, "No supported device found! Do you have access right?\n");
+    return -1;
+  }
+
+  if (r > 1) {
+    fprintf(stderr, "Multiple supported devices found! Which one should we open?\n");
+    for (int i = 0; i != r; ++i)
+      fprintf(stderr, "%s: %s", devices[i], names[i]);
+
+    return -1;
+  }
+
+  strcpy(device, devices[0]);
+  if (name != NULL)
+    strcpy(name, names[0]);
+  return 0;
+}
+
+int open_unique_device(int num_args, char** args) {
+  char device[ADHOC_BUFFER_SIZE];
+  char *path;
+  int fd;
+  
+  if (num_args < 2) {
+    if (select_unique_device(device, NULL) < 0) {
+      fprintf(stderr, "Usage: <program> [/dev/input/event<X>]\n");
+      exit(-1);
+    }
+
+    path = device;
+  } else {
+    path = args[1];
+  }
+  
+  fd = open(path, O_RDONLY);
+  if (fd == -1) {
+    fprintf(stderr, "could not open path %s\n", path);
+    exit(-1);
+  }
+
+  return fd;
 }

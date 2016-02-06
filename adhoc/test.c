@@ -41,18 +41,11 @@ struct adhoc_callbacks print_callbacks = {
 
 
 int main(int num_args, char **args) {
-  if (num_args < 2) {
-    fprintf(stderr, "Usage: <program> /dev/input/event<X>\n");
-    goto error_out;
-  }
-  
-  int fd = open(args[1], O_RDONLY);
-  if (fd == -1) {
-    perror("could not open path");
-    goto error_out;
-  }
+  int fd;
+  struct adhoc *adhoc;
 
-  struct adhoc *adhoc = adhoc_init(fd);
+  fd = open_unique_device(num_args, args);
+  adhoc = adhoc_init(fd);
   if (adhoc == NULL) {
     fprintf(stderr, "could not initialize adhoc library\n");
     goto error_init;
@@ -72,6 +65,5 @@ int main(int num_args, char **args) {
   adhoc_exit(adhoc);
  error_init:
   close(fd);
- error_out:
   return -1;
 }
