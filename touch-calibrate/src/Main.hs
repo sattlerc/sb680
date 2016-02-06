@@ -103,7 +103,7 @@ display = do
   col 0 0 0
   rectangle
   col 1 1 1
-  let d = 0.2
+  let d = 0.1
   rectangleAt (0, d) (d, 1 - d)
   rectangleAt (d, 0) (1 - d, d)
   rectangleAt (1 - d, d) (1, 1 - d)
