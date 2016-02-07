@@ -53,12 +53,20 @@ void adhoc_exit(struct adhoc *adhoc) {
   free(adhoc);
 }
 
+double adhoc_get_aspect_ratio(struct adhoc *adhoc) {
+  return adhoc->internal_calls.get_aspect_ratio(adhoc);
+}
+
 int adhoc_get_fd(const struct adhoc *adhoc) {
   return libevdev_get_fd(adhoc->dev);
 }
 
 void adhoc_set_callbacks(struct adhoc *adhoc, const struct adhoc_callbacks *callbacks) {
   adhoc->callbacks = *callbacks;
+}
+
+void adhoc_set_data(struct adhoc *adhoc, void *data) {
+  adhoc->data = data;
 }
 
 int adhoc_parse(struct adhoc *adhoc) {
@@ -90,7 +98,7 @@ int next_event_wrapper(struct adhoc *adhoc, struct input_event *event) {
 }
 
 void report_mouse(const struct adhoc *adhoc, int touch_mod, float x, float y) {
-  void (*callback)(float x, float y) = NULL;
+  void (*callback)(void *data, float x, float y) = NULL;
   
   switch (touch_mod) {
   case -1:
@@ -107,22 +115,22 @@ void report_mouse(const struct adhoc *adhoc, int touch_mod, float x, float y) {
   }
 
   if (callback != NULL)
-    callback(x, y);
+    callback(adhoc->data, x, y);
 }
 
 void report_finger(const struct adhoc *adhoc) {
   if (adhoc->callbacks.select_finger != NULL)
-    adhoc->callbacks.select_finger();
+    adhoc->callbacks.select_finger(adhoc->data);
 }
 
 void report_rubber(const struct adhoc *adhoc) {
   if (adhoc->callbacks.select_rubber != NULL)
-    adhoc->callbacks.select_rubber();
+    adhoc->callbacks.select_rubber(adhoc->data);
 }
 
 void report_pen(const struct adhoc *adhoc, uint32_t colour) {
   if (adhoc->callbacks.select_pen != NULL)
-    adhoc->callbacks.select_pen(colour);
+    adhoc->callbacks.select_pen(adhoc->data, colour);
 }
 
 
@@ -152,20 +160,20 @@ int scan_devices(char devices[][ADHOC_BUFFER_SIZE], char names[][ADHOC_BUFFER_SI
     if (r < 0 || r >= ADHOC_BUFFER_SIZE)
       continue;
 
-    r = 0;
-    for (int k = 0; k != sizeof(RECOGNIZED_DEVICES) / sizeof(RECOGNIZED_DEVICES[0]); ++k)
-      if (strcmp(devices[j], RECOGNIZED_DEVICES[k]) == 0)
-        r = 1;
-
-    if (!r)
-      continue;
-
     fd = open(devices[j], O_RDONLY);
 		if (fd < 0)
       continue;
 
     if (ioctl(fd, EVIOCGNAME(ADHOC_BUFFER_SIZE), names[j]) == -1)
       goto error;
+
+    r = 0;
+    for (int k = 0; k != sizeof(RECOGNIZED_DEVICES) / sizeof(RECOGNIZED_DEVICES[0]); ++k)
+      if (strcmp(names[j], RECOGNIZED_DEVICES[k]) == 0)
+        r = 1;
+
+    if (!r)
+      continue;
 
     ++j;
     

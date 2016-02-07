@@ -37,6 +37,10 @@ void sb885_exit(struct adhoc *adhoc) {
   free(adhoc->state);
 }
 
+double sb885_get_aspect_ratio(struct adhoc *adhoc) {
+  return 0.75;
+}
+
 int sb885_parse(struct adhoc *adhoc) {
   struct sb885_state *state = adhoc->state;
 
@@ -153,7 +157,8 @@ int sb885_parse(struct adhoc *adhoc) {
 }
 
 struct internal_calls internal_calls_sb885 = {
-  .init  = sb885_init,
-  .exit  = sb885_exit,
-  .parse = sb885_parse
+  .init             = sb885_init,
+  .get_aspect_ratio = sb885_get_aspect_ratio,
+  .exit             = sb885_exit,
+  .parse            = sb885_parse
 };

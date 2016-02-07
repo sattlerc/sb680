@@ -258,7 +258,7 @@ static void sb885_remove(struct hid_device *hdev) {
 }
 
 
-#if 1 == 1
+#ifndef FAKE
 // SMART Technologies Inc.
 #define VENDOR_ID 0x0b8c
 #define PRODUCT_ID 0x0160

@@ -7,7 +7,7 @@
 
 #ifdef FAKE
 u8 fake_data[][18] = {
-#include "pens-ltr"
+#include "circles"
 {}};
 #endif
 
@@ -241,9 +241,15 @@ static void sb680_remove(struct hid_device *hdev) {
 }
 
 
+#ifndef FAKE
 // SMART Technologies Inc.
-#define VENDOR_ID 0x046d // 0x0b8c
-#define PRODUCT_ID 0xc06c// 0x0001
+#define VENDOR_ID 0x0b8c
+#define PRODUCT_ID 0x0061
+#else
+// Logitech Inc., Optical Mouse
+#define VENDOR_ID 0x046d
+#define PRODUCT_ID 0xc06c
+#endif
 
 const struct hid_device_id sb680_ids[] = {
   { HID_USB_DEVICE(VENDOR_ID, PRODUCT_ID) }, // SB680

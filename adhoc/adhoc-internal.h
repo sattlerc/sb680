@@ -6,12 +6,14 @@
 struct internal_calls {
   int (*init)(struct adhoc *adhoc);
   void (*exit)(struct adhoc *adhoc);
+  double (*get_aspect_ratio)(struct adhoc *adhoc);
   int (*parse)(struct adhoc *adhoc);
 };
 
 struct adhoc {
   struct libevdev *dev;
   struct adhoc_callbacks callbacks;
+  void *data;
   struct internal_calls internal_calls;
   void *state;
 };

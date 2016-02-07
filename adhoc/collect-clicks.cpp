@@ -24,7 +24,7 @@ int main(int num_args, char **args) {
     printf("press ctrl+d to end collection\n");
 
     struct adhoc_callbacks print_callbacks = {
-      .mouse_down    = [&](float x, float y) {
+      .mouse_down    = [&](void *, float x, float y) {
         printf("%f %f\n", x, y);
       },
       .mouse_up      = nullptr,

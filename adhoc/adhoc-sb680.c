@@ -36,6 +36,10 @@ void sb680_exit(struct adhoc *adhoc) {
   free(adhoc->state);
 }
 
+double sb680_get_aspect_ratio(struct adhoc *adhoc) {
+  return 0.75;
+}
+
 int sb680_parse(struct adhoc *adhoc) {
   struct sb680_state *state = adhoc->state;
 
@@ -133,7 +137,8 @@ int sb680_parse(struct adhoc *adhoc) {
 }
 
 struct internal_calls internal_calls_sb680 = {
-  .init  = sb680_init,
-  .exit  = sb680_exit,
-  .parse = sb680_parse
+  .init             = sb680_init,
+  .get_aspect_ratio = sb680_get_aspect_ratio,
+  .exit             = sb680_exit,
+  .parse            = sb680_parse
 };

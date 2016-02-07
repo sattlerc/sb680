@@ -1,5 +1,5 @@
 #!/bin/bash
-OUTPUT=$(./print)
+OUTPUT=$(sudo ./print)
 if (($? != 0)); then
     exit 1
 fi

@@ -6,27 +6,27 @@
 #include "adhoc.h"
 
 
-void print_mouse_down(float x, float y) {
+void print_mouse_down(void *data, float x, float y) {
   printf("mouse_down [x: %f1.4, y: %f1.4]\n", x, y);
 }
 
-void print_mouse_up(float x, float y) {
+void print_mouse_up(void *data, float x, float y) {
   printf("mouse_up [x: %f1.4, y: %f1.4]\n", x, y);
 }
 
-void print_mouse_move(float x, float y) {
+void print_mouse_move(void *data, float x, float y) {
   printf("mouse_move [x: %f1.4, y: %f1.4]\n", x, y);
 }
 
-void print_select_finger(void) {
+void print_select_finger(void *data) {
   printf("select_finger\n");
 }
 
-void print_select_rubber(void) {
+void print_select_rubber(void *data) {
   printf("select_rubber\n");
 }
 
-void print_select_pen(uint32_t colour) {
+void print_select_pen(void *data, uint32_t colour) {
   printf("select_pen [colour: %06x]\n", colour);
 }
 
