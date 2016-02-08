@@ -7,9 +7,11 @@ clean:
 
 load-sb680: all
 	bash -c 'sudo rmmod hid_generic; sudo rmmod sb680; sudo insmod sb680.ko; sudo modprobe hid_generic; dmesg | tail'
+	make -C ../adhoc setup
 
 load-sb885: all
 	bash -c 'sudo rmmod hid_multitouch; sudo rmmod hid_generic; sudo rmmod sb885; sudo insmod sb885.ko; sudo modprobe hid_multitouch; sudo modprobe hid_generic; dmesg | tail'
+	make -C ../adhoc setup
 
 unload-sb680:
 	sudo rmmod sb680; sudo rmmod hid_generic; sudo modprobe hid_generic
