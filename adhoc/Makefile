@@ -19,13 +19,13 @@ $(OUT): $(OBJS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 print: print.c $(OUT) $(DEPS)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< $(OUT)
+	$(CC) $(CFLAGS) -o $@ $< $(OUT) $(LDFLAGS)
 
 test: test.c $(OUT) $(DEPS)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< $(OUT)
+	$(CC) $(CFLAGS) -o $@ $< $(OUT) $(LDFLAGS)
 
 collect-clicks: collect-clicks.cpp $(OUT) $(DEPS)
-	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $< $(OUT)
+	$(CXX) $(CFLAGS) $(CXXFLAGS) -o $@ $< $(OUT) $(LDFLAGS)
 
 setup: print
 	./setup.sh

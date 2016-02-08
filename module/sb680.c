@@ -3,7 +3,7 @@
 #include <linux/hid.h>
 #include <linux/usb/input.h>
 
-#define FAKE
+//#define FAKE
 
 #ifdef FAKE
 u8 fake_data[][18] = {
@@ -244,7 +244,7 @@ static void sb680_remove(struct hid_device *hdev) {
 #ifndef FAKE
 // SMART Technologies Inc.
 #define VENDOR_ID 0x0b8c
-#define PRODUCT_ID 0x0061
+#define PRODUCT_ID 0x0001
 #else
 // Logitech Inc., Optical Mouse
 #define VENDOR_ID 0x046d
