@@ -1,0 +1,8 @@
+Report ID 5:
+The Barrel Switch field indicates whether the mouse button has been clicked immediately preceeding the current touch event.
+The Tip Switch field seems to be always set, except for when the Eraser field is set, in which case it is cleared.
+The In Range field seems to be always set.
+The Invert field seems to be always cleared.
+The Eraser field might correspond to palm-sized touch events.
+The tip pressure has only been observed at logical maximum.
+Physical ranges are missing, unfortunately.

@@ -1,0 +1,285 @@
+Usage Page (Desktop),                   ; Generic desktop controls (01h)
+Usage (Mouse),                          ; Mouse (02h, application collection)
+Collection (Application),
+    Report ID (1),
+    Usage (Pointer),                    ; Pointer (01h, physical collection)
+    Collection (Physical),
+        Usage Page (Button),            ; Button (09h)
+        Usage Minimum (01h),
+        Usage Maximum (03h),
+        Logical Minimum (0),
+        Logical Maximum (1),
+        Report Count (3),
+        Report Size (1),
+        Input (Variable),
+        Report Count (1),
+        Report Size (5),
+        Input (Constant),
+        Usage Page (Desktop),           ; Generic desktop controls (01h)
+        Logical Minimum (0),
+        Logical Maximum (2047),
+        Unit Exponent (15),
+        Unit (Centimeter),
+        Report Size (12),
+        Report Count (1),
+        Physical Minimum (0),
+        Physical Maximum (0),
+        Usage (X),                      ; X (30h, dynamic value)
+        Input (Variable),
+        Physical Maximum (0),
+        Usage (Y),                      ; Y (31h, dynamic value)
+        Input (Variable),
+    End Collection,
+End Collection,
+Usage Page (Digitizer),                 ; Digitizer (0Dh)
+Usage (Whiteboard),                     ; White board (06h, application collection)
+Logical Minimum (0),
+Logical Maximum (255),
+Collection (Application),
+    Report ID (2),
+    Report Size (8),
+    Report Count (63),
+    Usage (00h),
+    Input (Variable, Buffered Bytes),
+    Report Count (63),
+    Usage (00h),
+    Output (Variable, Buffered Bytes),
+End Collection,
+Usage Page (Digitizer),                 ; Digitizer (0Dh)
+Usage (Touchscreen),                    ; Touch screen (04h, application collection)
+Collection (Application),
+    Report ID (3),
+    Usage (Finger),                     ; Finger (22h, logical collection)
+    Collection (Logical),
+        Logical Minimum (0),
+        Logical Maximum (1),
+        Report Size (1),
+        Report Count (3),
+        Usage (Tip Switch),             ; Tip switch (42h, momentary control)
+        Usage (In Range),               ; In range (32h, momentary control)
+        Usage (Touch Valid),            ; Touch valid (47h, momentary control)
+        Input (Variable),
+        Report Size (5),
+        Report Count (1),
+        Input (Constant, Variable),
+        Logical Maximum (255),
+        Report Size (8),
+        Usage (Contact Identifier),     ; Contact identifier (51h, dynamic value)
+        Input (Variable),
+        Usage (Touch Valid),            ; Touch valid (47h, momentary control)
+        Input (Variable),
+        Usage (Tip Pressure),           ; Tip pressure (30h, dynamic value)
+        Input (Variable),
+        Logical Maximum (4095),
+        Report Size (16),
+        Report Count (1),
+        Usage Page (Desktop),           ; Generic desktop controls (01h)
+        Unit Exponent (15),
+        Unit (Centimeter),
+        Physical Minimum (0),
+        Physical Maximum (0),
+        Usage (X),                      ; X (30h, dynamic value)
+        Input (Variable),
+        Physical Maximum (0),
+        Usage (Y),                      ; Y (31h, dynamic value)
+        Input (Variable),
+    End Collection,
+    Collection (Logical),
+        Usage Page (Digitizer),         ; Digitizer (0Dh)
+        Logical Minimum (0),
+        Logical Maximum (1),
+        Report Size (1),
+        Report Count (3),
+        Usage (Tip Switch),             ; Tip switch (42h, momentary control)
+        Usage (In Range),               ; In range (32h, momentary control)
+        Usage (Touch Valid),            ; Touch valid (47h, momentary control)
+        Input (Variable),
+        Report Size (5),
+        Report Count (1),
+        Input (Constant, Variable),
+        Logical Maximum (255),
+        Report Size (8),
+        Usage (Contact Identifier),     ; Contact identifier (51h, dynamic value)
+        Input (Variable),
+        Usage (Touch Valid),            ; Touch valid (47h, momentary control)
+        Input (Variable),
+        Usage (Tip Pressure),           ; Tip pressure (30h, dynamic value)
+        Input (Variable),
+        Logical Maximum (4095),
+        Report Size (16),
+        Report Count (1),
+        Usage Page (Desktop),           ; Generic desktop controls (01h)
+        Unit Exponent (15),
+        Unit (Centimeter),
+        Physical Minimum (0),
+        Physical Maximum (0),
+        Usage (X),                      ; X (30h, dynamic value)
+        Input (Variable),
+        Physical Maximum (0),
+        Usage (Y),                      ; Y (31h, dynamic value)
+        Input (Variable),
+    End Collection,
+    Collection (Logical),
+        Usage Page (Digitizer),         ; Digitizer (0Dh)
+        Logical Minimum (0),
+        Logical Maximum (1),
+        Report Size (1),
+        Report Count (3),
+        Usage (Tip Switch),             ; Tip switch (42h, momentary control)
+        Usage (In Range),               ; In range (32h, momentary control)
+        Usage (Touch Valid),            ; Touch valid (47h, momentary control)
+        Input (Variable),
+        Report Size (5),
+        Report Count (1),
+        Input (Constant, Variable),
+        Logical Maximum (255),
+        Report Size (8),
+        Usage (Contact Identifier),     ; Contact identifier (51h, dynamic value)
+        Input (Variable),
+        Usage (Touch Valid),            ; Touch valid (47h, momentary control)
+        Input (Variable),
+        Usage (Tip Pressure),           ; Tip pressure (30h, dynamic value)
+        Input (Variable),
+        Logical Maximum (4095),
+        Report Size (16),
+        Report Count (1),
+        Usage Page (Desktop),           ; Generic desktop controls (01h)
+        Unit Exponent (15),
+        Unit (Centimeter),
+        Physical Minimum (0),
+        Physical Maximum (0),
+        Usage (X),                      ; X (30h, dynamic value)
+        Input (Variable),
+        Physical Maximum (0),
+        Usage (Y),                      ; Y (31h, dynamic value)
+        Input (Variable),
+    End Collection,
+    Collection (Logical),
+        Usage Page (Digitizer),         ; Digitizer (0Dh)
+        Logical Minimum (0),
+        Logical Maximum (1),
+        Report Size (1),
+        Report Count (3),
+        Usage (Tip Switch),             ; Tip switch (42h, momentary control)
+        Usage (In Range),               ; In range (32h, momentary control)
+        Usage (Touch Valid),            ; Touch valid (47h, momentary control)
+        Input (Variable),
+        Report Size (5),
+        Report Count (1),
+        Input (Constant, Variable),
+        Logical Maximum (255),
+        Report Size (8),
+        Usage (Contact Identifier),     ; Contact identifier (51h, dynamic value)
+        Input (Variable),
+        Usage (Touch Valid),            ; Touch valid (47h, momentary control)
+        Input (Variable),
+        Usage (Tip Pressure),           ; Tip pressure (30h, dynamic value)
+        Input (Variable),
+        Logical Maximum (4095),
+        Report Size (16),
+        Report Count (1),
+        Usage Page (Desktop),           ; Generic desktop controls (01h)
+        Unit Exponent (15),
+        Unit (Centimeter),
+        Physical Minimum (0),
+        Physical Maximum (0),
+        Usage (X),                      ; X (30h, dynamic value)
+        Input (Variable),
+        Physical Maximum (0),
+        Usage (Y),                      ; Y (31h, dynamic value)
+        Input (Variable),
+    End Collection,
+    Usage Page (Digitizer),             ; Digitizer (0Dh)
+    Report Count (1),
+    Report Size (8),
+    Logical Minimum (0),
+    Logical Maximum (255),
+    Usage (Contact Count),              ; Contact count (54h, dynamic value)
+    Input (Variable),
+    Logical Maximum (4),
+    Usage (Contact Count Maximum),      ; Contact count maximum (55h, static value)
+    Feature (Variable),
+End Collection,
+Usage (Configuration),                  ; Configuration (0Eh, application collection)
+Collection (Application),
+    Report ID (4),
+    Usage (Device Settings),            ; Device settings (23h, logical collection)
+    Collection (Logical),
+        Usage (Device Mode),            ; Device input mode (52h, dynamic value)
+        Usage (Device Identifier),      ; Device identifier (53h, dynamic value)
+        Logical Minimum (0),
+        Logical Maximum (10),
+        Report Size (8),
+        Report Count (2),
+        Feature (Variable),
+    End Collection,
+End Collection,
+Usage Page (Digitizer),                 ; Digitizer (0Dh)
+Usage (Pen),                            ; Pen (02h, application collection)
+Collection (Application),
+    Report ID (5),
+    Usage (Stylus),                     ; Stylus (20h, logical collection)
+    Collection (Physical),
+        Logical Minimum (0),
+        Logical Maximum (1),
+        Report Size (1),
+        Report Count (5),
+        Usage (Tip Switch),             ; Tip switch (42h, momentary control)
+        Usage (In Range),               ; In range (32h, momentary control)
+        Usage (Barrel Switch),          ; Barrel switch (44h, momentary control)
+        Usage (Invert),                 ; Invert (3Ch, momentary control)
+        Usage (Eraser),                 ; Eraser (45h, momentary control)
+        Input (Variable),
+        Report Size (3),
+        Report Count (1),
+        Input (Constant, Variable),
+        Logical Maximum (1023),
+        Report Size (10),
+        Report Count (1),
+        Usage (Tip Pressure),           ; Tip pressure (30h, dynamic value)
+        Input (Variable),
+        Report Size (6),
+        Input (Constant, Variable),
+        Usage Page (Desktop),           ; Generic desktop controls (01h)
+        Report Size (16),
+        Report Count (1),
+        Unit Exponent (15),
+        Unit (Centimeter),
+        Logical Maximum (4095),
+        Physical Minimum (0),
+        Physical Maximum (0),
+        Usage (X),                      ; X (30h, dynamic value)
+        Input (Variable),
+        Physical Maximum (0),
+        Usage (Y),                      ; Y (31h, dynamic value)
+        Input (Variable),
+    End Collection,
+    Usage Page (Digitizer),             ; Digitizer (0Dh)
+    Report Count (1),
+    Report Size (8),
+    Logical Minimum (0),
+    Logical Maximum (2),
+    Usage (Contact Count Maximum),      ; Contact count maximum (55h, static value)
+    Feature (Variable),
+End Collection,
+Usage Page (Consumer),                  ; Consumer (0Ch)
+Usage (Consumer Control),               ; Consumer control (01h, application collection)
+Collection (Application),
+    Report ID (6),
+    Usage Page (Button),                ; Button (09h)
+    Collection (Physical),
+        Usage (00h),
+        Usage (01h),
+        Usage (02h),
+        Usage (03h),
+        Usage (04h),
+        Usage (05h),
+        Usage (06h),
+        Usage (07h),
+        Logical Minimum (0),
+        Logical Maximum (1),
+        Report Size (1),
+        Report Count (8),
+        Input (Variable),
+    End Collection,
+End Collection
