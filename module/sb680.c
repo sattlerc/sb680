@@ -245,6 +245,7 @@ static void sb680_remove(struct hid_device *hdev) {
 // SMART Technologies Inc.
 #define VENDOR_ID 0x0b8c
 #define PRODUCT_ID 0x0001
+#define PRODUCT_ID_2 0x0061
 #else
 // Logitech Inc., Optical Mouse
 #define VENDOR_ID 0x046d
@@ -253,6 +254,7 @@ static void sb680_remove(struct hid_device *hdev) {
 
 const struct hid_device_id sb680_ids[] = {
   { HID_USB_DEVICE(VENDOR_ID, PRODUCT_ID) }, // SB680
+  { HID_USB_DEVICE(VENDOR_ID, PRODUCT_ID_2) }, // SB680 with other product id
   { }
 };
 
