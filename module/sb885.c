@@ -207,8 +207,7 @@ static int sb885_raw_event(struct hid_device *hdev, struct hid_report *report, u
 
 static int sb885_probe(struct hid_device *hdev, const struct hid_device_id *id) {
   struct sb885 *sb885;
-  struct list_head *pos;
-  int c, error;
+  int error;
   
   printk(KERN_INFO "sb885: probing...");
 
@@ -226,14 +225,17 @@ static int sb885_probe(struct hid_device *hdev, const struct hid_device_id *id) 
     goto fail_parse;
   }
 
-  c = 0;
-  list_for_each(pos, &hdev->report_enum[HID_INPUT_REPORT].report_list)
-    ++c;
+  {
+    struct list_head *pos;
+    int c = 0;
+    list_for_each(pos, &hdev->report_enum[HID_INPUT_REPORT].report_list)
+      ++c;
 
-  if (c == 5) {
-    printk(KERN_INFO "sb865: mismatching number %d of reports, skipping", c);
-    error = 1;
-    goto fail_parse;
+    if (c != 6) {
+      printk(KERN_INFO "sb865: mismatching report count %d, skipping", c);
+      error = 1;
+      goto fail_parse;
+    }
   }
 
   error = sb885_init_input(sb885, id);
