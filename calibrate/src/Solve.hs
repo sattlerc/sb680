@@ -94,7 +94,7 @@ main = do
   let pps = partition_points ps
   unless (length pps == length reference_points) $
     fail "Provided points do not partition into exactly one group per reference point!"
-  let pts = concat $ zipWith (\r -> map (r,)) reference_points pps
+  let pts = concat $ zipWith (\r -> map (, r)) reference_points pps
   let r = iterate (solve pts) initial_solution !! 10
   print_result r
   hPutStrLn stderr $ "error: " ++ show (get_error pts r)
